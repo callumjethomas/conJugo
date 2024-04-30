@@ -30,9 +30,6 @@
 SQLite database which holds the user and verb information for the app.
 This database schema can created using the commands in the file `static/create_db.sql`
 
-<details>
-<summary>See more/less</summary>
-
 The database is structured as follows:
 
 [![](https://mermaid.ink/img/pako:eNp9kk1vgzAMhv8K8plWLd9wHpp22A5bD9OEVGXELagjQUnYxij_fSFtWb9WkBB-4ve1De4g5xQhARR3JVkLUmUsY1YjUUir02_6enhapPfps4HLku7gIn1dGMJIhUeoILIYwn7wkTkXmBNBz63Gg9HvdpElYfILxRHVBtpBnRwcPGpeMiXHLj5RvF8MM8DTOmeDqLZG69_ejHHFOb0wHuB1Y6NRyCReiAy9obL2f2S7nUx49_f5rMTKYKWDcs2sDbYZXMnezX81c7jBhgpFRUqq18D0lYEqUFeHQUOJ2AzJvc4jjeIvLcshUaJBG5qaEoX7xYFkRT7kSFNaKi5GWBP2xnl1UOoQkg6-IXGcaBr7ketEjhfOwplrQ6tp4E9dTz_nbhDOo9Dvbfgx-tk0iON47kWB68ex43k2oCn1uFtks8_9Lz3E6Fw?type=png)](https://mermaid-js.github.io/mermaid-live-editor/edit#pako:eNp9kk1vgzAMhv8K8plWLd9wHpp22A5bD9OEVGXELagjQUnYxij_fSFtWb9WkBB-4ve1De4g5xQhARR3JVkLUmUsY1YjUUir02_6enhapPfps4HLku7gIn1dGMJIhUeoILIYwn7wkTkXmBNBz63Gg9HvdpElYfILxRHVBtpBnRwcPGpeMiXHLj5RvF8MM8DTOmeDqLZG69_ejHHFOb0wHuB1Y6NRyCReiAy9obL2f2S7nUx49_f5rMTKYKWDcs2sDbYZXMnezX81c7jBhgpFRUqq18D0lYEqUFeHQUOJ2AzJvc4jjeIvLcshUaJBG5qaEoX7xYFkRT7kSFNaKi5GWBP2xnl1UOoQkg6-IXGcaBr7ketEjhfOwplrQ6tp4E9dTz_nbhDOo9Dvbfgx-tk0iON47kWB68ex43k2oCn1uFtks8_9Lz3E6Fw)
@@ -50,7 +47,7 @@ The database comes preloaded with verbs taken from a list of <a href="https://ww
 - **type**: Either 'regular' or 'irregular' (based on linguasorb verb list), or 'custom' if entered by user.
 - **user_id**: Foreign key referencing `users` table. NULL for preloaded verb.
 
-> ℹ️ **Note:**
+> [!NOTE]
 > Including the `user_id` field enables users to add their own custom verbs to the database.
 #### `scorecard`
 Stores the answers the user has entered for the current *Practice* round and allows the app to calculates a score for the user by comparing the user's answer to the correct answer for the corresponding question.
@@ -61,7 +58,7 @@ Stores the answers the user has entered for the current *Practice* round and all
 - **correct_answer**: The correct answer to the corresponding question.
 - **points**: Stores a point for each correct answer as an integer (1 if correct, 0 if incorrect).
 
-> ⚠️ **Warning:**
+> [!WARNING]
 > Scorecard data is *not* persistent between rounds or sessions, data is wiped at the end of each *Practice* round for each user.
 
 #### `moods`
@@ -74,13 +71,10 @@ List of possible grammatical tenses, for reference by `app.py`.
 - **tense_id**: Primary key for the table.
 - **name**: Name of grammatical tense.
 
-</details>
+---
 
 ### `helpers.py`
 Python file which contains helper functions used in the main `app.py` file.
-
-<details>
-<summary>See more/less</summary>
 
 #### `login_required(f)`
 Decorator which can be added to `app.py` routes. Redirects the user to the login page if `session` determines they are not logged in due to there being no `user_id` variable stored for the current `session`.
@@ -112,14 +106,10 @@ Special conditions:
 - `mlconjug3` stores some pronouns together as a string (e.g. `'il, (elle on)'`). These have had to be separated manually to give the user each of these pronouns as an individual option.
 - The pronoun *je* becomes *j'* when it occurs before a vowel. This has been accounted for at the end of this function.
 
-</details>
+---
 
 ### `app.py`
 Main Python file which describes the routes for rendering the app pages in Flask.
-
-<details>
-
-<summary>See more/less</summary>
 
 #### `index`
 Renders the `index.html` template (home page) for the app. This will redirect to the login page if the user is not logged in, otherwise it will allow them to go to the *Practice* or *Conjugate* pages.
@@ -201,7 +191,7 @@ In brief the `delete_verb` function:
 2. If so, deletes all custom verbs from the `verb` table with the current user's `user_id`.
 3. If not, checks for which verb the user wants to delete and deletes that verb from the `verb` table.
 
-> ℹ️ **Note:**
+> [!NOTE]
 > The inputs for this function on the verb list page are buttons, not a text input. These buttons take the value from the verb they appear next to, so it is not possible for the user to delete custom verbs that do not exist.
 
 #### `conjugate`
@@ -212,7 +202,7 @@ In brief the `conjugate` function:
 2. Attempts to conjugate the input verb using `mlconjug3.conjugate()`
 3. Returns the resulting `VerbFr` conjugation object to the `conjugate` page via POST, allowing it to be rendered as a table via jinja templating.
 
-> ⚠️ **Warning:**
+> [!WARNING]
 > There is a bug in `mlconjug3` caused by the unusual nature of the French verb *falloir*. To work around this, the results for this verb have had to be hard-coded in a separate html page.
 
 #### `start`
@@ -271,20 +261,16 @@ In brief the `scorecard` function:
 #### Error handling
 The `errorhandler` functionality is used to render custom error messages for commonly seen HTML error codes including 400, 404, 405 and 500.
 
-</details>
+---
 
 ### `layout.html`
 Root template for html rendering.
 
-<details>
-<summary> See more/less </summary>
 <a href="https://getbootstrap.com/docs/5.3/getting-started/introduction/">Bootstrap 5.3.2</a> was used for CSS, Javascript and icon styling. A navbar was used at the top of each page to provide consistent look and branding across the whole app. This allows access to the home page, verb list, accounts and logout functions from any page in the app.
-</details>
+
+---
 
 ### `styles.css`
 CSS file for overwriting some Bootstrap CSS values with custom CSS.
 
-<details>
-<summary> See more/less </summary>
 Most of the CSS styling is handled via <a href="https://getbootstrap.com/docs/5.3/getting-started/introduction/">Bootstrap 5.3.2</a>. However some custom CSS was used to overwrite Bootstrap values for navbar background, text and link colouring.
-</details>
