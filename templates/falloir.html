@@ -1,0 +1,83 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Conjugate
+{% endblock %}
+
+{% block main %}
+
+    <div class="container-fluid text-center mx-auto mt-5 w-25">
+        <form action="/conjugate" method="post">
+            <div class="form-floating mt-2 mx-auto text-center">
+                <input class="form-control" autocomplete="off" autofocus id="verb" name="verb" placeholder="Verb:" type="text" required>
+                <label for="verb">Enter a verb to conjugate:</label>
+            </div>
+            <div class="mx-auto text-center mt-2" style="width: 9rem;"></div>
+            <button class="btn btn-primary" type="submit">Conjugate</button>
+        </div>
+    </form>
+    </div>
+<!-- Fix for the unusual verb 'falloir' -->
+    <table class="table table-striped mx-auto caption-top" style="width: 72rem;">
+        <caption>Conjugation of <strong>falloir</strong></caption>
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">Mood</th>
+                <th scope="col">Tense</th>
+                <th scope="col">Person</th>
+                <th scope="col">Conjugation</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="table-group-divider" id="Indicatif Présent">
+                <td>Indicatif</td>
+                <td>Présent</td>
+                <td>il</td>
+                <td>faut</td>
+            </tr>
+            <tr class="table-group-divider" id="Indicatif Imparfait">
+                <td>Indicatif</td>
+                <td>Imparfait</td>
+                <td>il</td>
+                <td>fallait</td>
+            </tr>
+            <tr class="table-group-divider" id="Indicatif Futur">
+                <td>Indicatif</td>
+                <td>Futur</td>
+                <td>il</td>
+                <td>faudra</td>
+            </tr>
+            <tr class="table-group-divider" id="Indicatif Passé Simple">
+                <td>Indicatif</td>
+                <td>Passé Simple</td>
+                <td>il</td>
+                <td>fallut</td>
+            </tr>
+            <tr class="table-group-divider" id="Conditionnel Présent">
+                <td>Conditionnel</td>
+                <td>Présent</td>
+                <td>il</td>
+                <td>faudrait</td>
+            </tr>
+            <tr class="table-group-divider" id="Subjonctif Présent">
+                <td>Subjonctif</td>
+                <td>Présent</td>
+                <td>il</td>
+                <td>faille</td>
+            </tr>
+            <tr class="table-group-divider" id="Subjonctif Imparfait">
+                <td>Subjonctif</td>
+                <td>Imparfait</td>
+                <td>il</td>
+                <td>fallût</td>
+            </tr>
+            <tr class="table-group-divider" id="Participe Participe Passé">
+                <td>Participe</td>
+                <td>Participe Passé</td>
+                <td>masculin singulier</td>
+                <td>fallu</td>
+            </tr>
+        </tbody>
+    </table>
+
+{% endblock %}

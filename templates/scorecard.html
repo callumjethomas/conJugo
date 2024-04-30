@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Scorecard
+{% endblock %}
+
+{% block main %}
+
+    <div class="container-fluid mx-auto my-5">
+        <table class="table mx-auto caption-top" style="width: 72rem;">
+            <caption>Your scorecard:</caption>
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">Your answer</th>
+                    <th scope="col">Correct answer</th>
+                    <th scope="col">Points</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in scorecard %}
+                    {% if row["points"] == None %}
+                    {% elif row["points"] == 1 %}
+                        <tr class="table-success">
+                            <td>{{ row.user_answer }}</td>
+                            <td>{{ row.correct_answer }}</td>
+                            <td>{{ row.points }}</td>
+                        </tr>
+                    {% else %}
+                        <tr class="table-danger">
+                            <td>{{ row.user_answer }}</td>
+                            <td>{{ row.correct_answer }}</td>
+                            <td>{{ row.points }}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        </div>
+
+        <div class="container-fluid mx-auto text-center mt-5" style="width: 18rem;">
+            <p>Total score: {{ score }}</p>
+            <p>Number of questions: {{ total }}</p>
+            {% if score and total %}
+                <p>Percentage correct: {{'%0.1f'| format((score / total * 100)|float)}}%</p>
+            {% endif %}
+        </div>
+
+        <div class="container-fluid mx-auto text-center" style="width: 18rem;">
+            <form action="/start" method="get">
+                <button class="btn btn-success mt-5 btn-lg" type="submit">Try again</button>
+            </form>
+        </div>
+
+{% endblock %}

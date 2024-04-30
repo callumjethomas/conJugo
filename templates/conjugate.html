@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Conjugate
+{% endblock %}
+
+{% block main %}
+
+    <div class="container-fluid text-center mx-auto mt-5 w-25">
+        <form action="/conjugate" method="post">
+            <div class="form-floating mt-2 mx-auto text-center">
+                <input class="form-control" autocomplete="off" autofocus id="verb" name="verb" placeholder="Verb:" type="text" required>
+                <label for="verb">Enter a verb to conjugate:</label>
+            </div>
+            <div class="mx-auto text-center mt-2" style="width: 9rem;"></div>
+            <button class="btn btn-primary" type="submit">Conjugate</button>
+        </div>
+    </form>
+    </div>
+
+    {% if error_message %}
+        <div class="alert alert-danger alert-dismissable text-start mt-3 w-25 mx-auto" role="alert">
+            <div class="row">
+                <div class="col-1"><i class="bi bi-exclamation-triangle-fill"></i></div>
+                <div class="col-10">{{ error_message }}</div>
+                <div class="col-1"><button type='button' class='btn-close' style="float: right; vertical-align: middle;" data-bs-dismiss='alert' aria-label='Close'></button></div>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if result %}
+        <table class="table table-striped mx-auto caption-top" style="width: 72rem;">
+            <caption>Conjugation of <strong>{{ result.verb_info.infinitive }}</strong></caption>
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">Mood</th>
+                    <th scope="col">Tense</th>
+                    <th scope="col">Person</th>
+                    <th scope="col">Conjugation</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in result %}
+                    {% if row[0] == 'Infinitif' %}
+                    {% elif row[2] == 'je' or row[0] == 'Imperatif' or row[1] == 'Participe Présent' %}
+                        <tr class="table-group-divider">
+                            <td>{{ row[0] }}</td>
+                            <td>{{ row[1] }}</td>
+                            <td>{{ row[2] }}</td>
+                            <td>{{ row[3] }}</td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td>{{ row[0] }}</td>
+                            <td>{{ row[1] }}</td>
+                            <td>{{ row[2] }}</td>
+                            <td>{{ row[3] }}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+
+{% endblock %}

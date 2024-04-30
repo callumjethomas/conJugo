@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Error: {{ code }}
+{% endblock %}
+
+{% block main %}
+    <div class="card text-bg-danger border-0 mx-auto w-25 text-center my-5">
+        <div class="card-body">
+            <h1 class="card-title">Error {{ code }} <i class="bi bi-exclamation-diamond-fill"></i></h1>
+            <h2 class="card-text"> {{ message }} </h2>
+            <h3><a class="card-link link-body-emphasis" href="/">Take me back to the main page.</a></h3>
+        </div>
+{% endblock %}

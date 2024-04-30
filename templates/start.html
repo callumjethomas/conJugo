@@ -1,0 +1,98 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Practice
+{% endblock %}
+
+{% block main %}
+
+    <div class="container-fluid mx-auto my-5">
+        <form action="/start" method="post">
+
+            <div class="mx-auto text-center" style="width: 18rem;">
+                <button class="btn btn-primary btn-lg" style="width: 9rem;" type="submit">Start</button>
+            </div>
+
+            <ul class="mx-auto mt-5" style="width: 36rem;">
+                <p>Choose verbs to include:</p>
+                <div class="list-group-horizontal list-group">
+                    <li class="list-group-item" style="width: 18rem;">
+                        <input class="form-check-input me-1" id="regular" type="checkbox" name="verb_types" value="regular" checked>
+                        <label class="form-check-label" stretched-link for="regular">Regular</label>
+                    </li>
+                    <li class="list-group-item" style="width: 18rem;">
+                        <input class="form-check-input me-1" id="irregular" type="checkbox" name="verb_types" value="irregular" checked>
+                        <label lass="form-check-label" stretched-link for="irregular">Irregular</label>
+                    </li>
+                    <li class="list-group-item" style="width: 18rem;">
+                        <input class="form-check-input me-1" id="custom" type="checkbox" name="verb_types" value="custom">
+                        <label lass="form-check-label" stretched-link for="custom">Custom</label>
+                    </li>
+                </div>
+            </ul>
+
+            {% if error_message%}
+                <div id="check_hint" class="alert alert-danger alert-dismissable my-3 py-2 text-start mx-auto w-25" role="alert">
+                    <div class="row">
+                        <div class="col-1"><i class="bi bi-exclamation-triangle-fill"></i></div>
+                        {% if error_message == "custom" %}
+                            <div class="col-10">No custom verbs present. </br> Visit <a href='verb_list' class='alert-link'>verb list page</a> to add some!</div>
+                        {% else %}
+                            <div class="col-10">{{ error_message }}</div>
+                        {% endif %}
+                        <div class="col-1"><button type='button' class='btn-close' style="float: right; vertical-align: middle;" data-bs-dismiss='alert' aria-label='Close'></button></div>
+                    </div>
+                </div>
+            {% endif %}
+
+            <ul class="mx-auto mt-5" style="width: 36rem;">
+                <p>Choose tenses/moods to include:</p>
+                <div class="list-group list-group-horizontal">
+                    <li class="list-group-item" style="width: 18rem;">
+                        <input class="form-check-input me-1" id="present" type="checkbox" name="verb_tenses" value="Présent" checked>
+                        <label class="form-check-label" stretched-link for="present">Present</label>
+                    </li>
+                    <li class="list-group-item" style="width: 18rem;">
+                        <input class="form-check-input me-1" id="subjunctive" type="checkbox" name="verb_tenses" value="Subjonctif">
+                        <label class="form-check-label" stretched-link for="subjunctive">Subjunctive</label>
+                    </li>
+                </div>
+
+                <div class="list-group list-group-horizontal">
+                    <li class="list-group-item" style="width: 18rem;">
+                        <input class="form-check-input me-1" id="imperfect" type="checkbox" name="verb_tenses" value="Imparfait">
+                        <label lass="form-check-label" stretched-link for="imperfect">Imperfect</label>
+                    </li>
+                    <li class="list-group-item" style="width: 18rem;">
+                        <input class="form-check-input me-1" id="conditional" type="checkbox" name="verb_tenses" value="Conditionnel">
+                        <label class="form-check-label" stretched-link for="conditional">Conditional</label>
+                    </li>
+                </div>
+
+                <div class="list-group list-group-horizontal">
+                    <li class="list-group-item" style="width: 18rem;">
+                        <input class="form-check-input me-1" id="future" type="checkbox" name="verb_tenses" value="Futur">
+                        <label lass="form-check-label" stretched-link for="future">Future</label>
+                    </li>
+                    <li class="list-group-item" style="width: 18rem;">
+                        <input class="form-check-input me-1" id="imperative" type="checkbox" name="verb_tenses" value="Imperatif">
+                        <label class="form-check-label" stretched-link for="imperative">Imperative</label>
+                    </li>
+                </div>
+
+                <div class="list-group list-group-horizontal">
+                    <li class="list-group-item" style="width: 18rem;">
+                        <input class="form-check-input me-1" id="simple_past" type="checkbox" name="verb_tenses" value="Passé Simple">
+                        <label lass="form-check-label" stretched-link for="simple_past">Simple Past</label>
+                    </li>
+                    <li class="list-group-item" style="width: 18rem;">
+                        <input class="form-check-input me-1" id="participle" type="checkbox" name="verb_tenses" value="Participe">
+                        <label class="form-check-label" stretched-link for="participle">Participle</label>
+                    </li>
+                </div>
+
+            </ul>
+        </form>
+    </div>
+
+{% endblock %}

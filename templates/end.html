@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Game over!
+{% endblock %}
+
+{% block main %}
+
+    <div class="card mx-auto text-center text-bg-dark my-5" style="width: 18rem;">
+        <div class="card-body">
+            <h1 class="card-title mb-2" style="color: gold;"><i class="bi bi-trophy-fill"></i></h1>
+            <h3 class="card-subtitle mb-2"><b>GAME OVER</b></h3>
+        </div>
+    </div>
+
+    <div class="container-fluid mx-auto text-center mt-3" style="width: 18rem;">
+        <p>No more questions remain!</p>
+        <p>FINAL SCORE: {{ score }}/{{ total }}</p>
+    </div>
+
+    <div class="container-fluid mx-auto text-center" style="width: 18rem;">
+        <form action="/scorecard" method="get">
+            <button class="btn btn-danger mt-3 btn-lg" type="submit">See results</button>
+        </form>
+    </div>
+
+{% endblock %}

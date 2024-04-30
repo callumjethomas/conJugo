@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Delete
+{% endblock %}
+
+{% block main %}
+    <div class="container-fluid w-25 text-center">
+        <form action="/delete" method="post">
+            {% if error_message %}
+                <div class="alert alert-danger alert-dismissable my-3 py-2 text-start" role="alert">
+                    <div class="row">
+                        <div class="col-1"><i class="bi bi-exclamation-triangle-fill"></i></div>
+                        <div class="col-10">{{ error_message }}</div>
+                        <div class="col-1"><button type='button' class='btn-close' style="float: right; vertical-align: middle;" data-bs-dismiss='alert' aria-label='Close'></button></div>
+                    </div>
+                </div>
+            {% endif %}
+            <div class="alert alert-danger mt-2" role="alert">
+                Are you <strong>sure</strong> you want to delete your account?</br><strong>Account deletion cannot be undone.</strong>
+            </div>
+            <div class="mb-3">
+                <input class="form-control mx-auto w-auto" id="password" name="password" placeholder="Enter password" type="password">
+            </div>
+            <button class="btn btn-danger mb-3" type="submit">Yes, delete my account!</button>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,103 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Verb list
+{% endblock %}
+
+{% block main %}
+    <div class="container-sm mx-auto mt-3">
+        <div class="row">
+            <div class="col">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Regular</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in verb_list %}
+                            {% if row.type == 'regular' %}
+                                <tr>
+                                    <td>{{ row.name }}</td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="col">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Irregular</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in verb_list %}
+                            {% if row.type == 'irregular' %}
+                                <tr>
+                                    <td>{{ row.name }}</td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="col">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Custom</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in verb_list %}
+                            {% if row.type == 'custom' %}
+                                <tr>
+                                    <td>
+                                        <form action="/delete_verb" method="post">
+                                            {{ row.name }}
+                                            <input type="hidden" name="verb" value='{{ row.name }}'>
+                                            <button class="btn float-end" , type="submit" , style="--bs-btn-padding-y: 0; --bs-btn-padding-x: 0;
+                                                                                                   --bs-btn-font-size: .9rem; --bs-btn-color: var(--bs-danger);
+                                                                                                   --bs-btn-hover-color: var(--bs-danger-text-emphasis);">
+                                                <i class="bi bi-x-circle-fill"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                        {% if delete_all %}
+                            <tr>
+                                <td>
+                                    <form action="/delete_verb" method="post">
+                                        <input type="hidden" name="delete_all" value="delete_all">
+                                        <button class="btn btn-danger" , type="submit">Delete all</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endif %}
+                        <tr>
+                            <td>
+                                <form action="/add_verb" method="post">
+                                    <input class="form-control" autofocus autocomplete="off" id="verb" required name="verb" placeholder="Add a verb:" type="text" style="height: 1.5em;">
+                                    {% if error_message %}
+                                        <div class="alert alert-danger alert-dismissable my-3 py-2 text-start" role="alert">
+                                            <div class="row">
+                                                <div class="col-1"><i class="bi bi-exclamation-triangle-fill"></i></div>
+                                                <div class="col-10">{{ error_message }}</div>
+                                                <div class="col-1"><button type='button' class='btn-close' style="float: right; vertical-align: middle;" data-bs-dismiss='alert' aria-label='Close'></button></div>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

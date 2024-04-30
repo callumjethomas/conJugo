@@ -1,0 +1,15 @@
+a.navbar-brand:hover {
+    color: #091CD3 !important;
+}
+
+a.navbar-brand:hover i.bi.bi-chat-heart-fill {
+    color: #091CD3 !important;
+}
+
+a.nav-link:link {
+    color: white !important;
+}
+
+a.nav-link:hover {
+    color: #091CD3 !important;
+}

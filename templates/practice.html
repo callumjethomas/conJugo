@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Practice
+{% endblock %}
+
+{% block main %}
+
+    <div class="card mx-auto text-center text-bg-primary my-5" style="width: 18rem;">
+        <div class="card-body">
+            {% if pronoun %}
+                {% if tense == 'Participe Passé' %}
+                    <h3 class="card-title"><i>{{ verb }}</i></h3>
+                {% else %}
+                    <h3 class="card-title">{{ pronoun }} + <i>{{ verb }}</i></h3>
+                {% endif %}
+            {% else %}
+                <h3 class="card-title">{{ verb }}</i></h3>
+            {% endif %}
+            {% if mood in ['Imperatif', 'Participe'] %}
+                {% if tense == 'Participe Passé' %}
+                    <h6 class="card-subtitle mb-2 text-primary-emphasis">{{ tense }}, {{pronoun}}</h6>
+                {% else %}
+                    <h6 class="card-subtitle mb-2 text-primary-emphasis">{{ tense }}</h6>
+                {% endif %}
+            {% else %}
+                <h6 class="card-subtitle mb-2 text-primary-emphasis">{{ mood }}, {{ tense }}</h6>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="container-fluid mx-auto text-center" style="width: 18rem;">
+        <form action="/check" method="post">
+            <label class="form-label mt-1" for="answer">Your answer: </label>
+            <input class="form-control mt-1" autocomplete="off" autofocus id="user_answer" required name="user_answer" placeholder="[pronoun] [conjugation]" type="text">
+            <button class="btn btn-primary mt-3 btn-lg" type="submit">Submit</button>
+        </form>
+    </div>
+
+    <div class="container-fluid mx-auto text-center mt-3" style="width: 18rem;">
+        <p>SCORE: {{ score }}/{{ total }}</p>
+    </div>
+
+    <div class="container-fluid mx-auto text-center" style="width: 18rem;">
+        <form action="/scorecard" method="get">
+            <button class="btn btn-danger mt-3 btn-lg" type="submit">End practice</button>
+        </form>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Account settings
+{% endblock %}
+
+{% block main %}
+    <div class="container-fluid w-25 text-center">
+        <form action="/account" method="post">
+            {% if error_message %}
+                <div class="alert alert-danger alert-dismissable my-3 py-2 text-start" role="alert">
+                    <div class="row">
+                        <div class="col-1"><i class="bi bi-exclamation-triangle-fill"></i></div>
+                        <div class="col-10">{{ error_message }}</div>
+                        <div class="col-1"><button type='button' class='btn-close' style="float: right; vertical-align: middle;" data-bs-dismiss='alert' aria-label='Close'></button></div>
+                    </div>
+                </div>
+            {% endif %}
+            <div class="mb-3 mt-3">
+                <input class="form-control mx-auto w-auto" id="old-password" name="old-password" placeholder="Existing password" type="password" required>
+            </div>
+            <div class="mb-3 input-group">
+                <input class="form-control mx-auto w-auto" id="new-password" name="new-password" placeholder="New password" type="password" required>
+                <div class="input-group-addon input-group-button">
+                    <button class="btn btn-secondary" type="button" aria-label='Show password tip' onclick="getElementById('pw_hint').innerHTML = `<div class='alert alert-secondary alert-dismissable' role='alert'><div>Password must be at least 8 characters long and contain at least 1 lowercase letter, 1 uppercase letter and 1 number.</div><button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>`">
+                        <i class="bi bi-question-circle-fill"></i></button>
+                </div>
+            </div>
+            <div id="pw_hint"></div>
+            <div class="mb-3">
+                <input class="form-control mx-auto w-auto" id="confirmation" name="confirmation" placeholder="Confirm new password" type="password" required>
+            </div>
+            <div class="mt-5">
+                <button class="btn btn-primary mb-3" type="submit">Change password</button>
+            </div>
+            <div>
+                <a href="/delete" class="btn btn-danger mb-3">Delete your account</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

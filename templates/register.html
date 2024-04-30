@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+    <div class="container-fluid" style="width: 20%;">
+        <form action="/register" method="post">
+            {% if error_message %}
+                <div class="alert alert-danger alert-dismissable my-3 py-2 text-start" role="alert">
+                    <div class="row">
+                        <div class="col-1"><i class="bi bi-exclamation-triangle-fill"></i></div>
+                        <div class="col-10">{{ error_message }}</div>
+                        <div class="col-1"><button type='button' class='btn-close' style="float: right; vertical-align: middle;" data-bs-dismiss='alert' aria-label='Close'></button></div>
+                    </div>
+                </div>
+            {% endif %}
+            <div class="my-3">
+                <input autocomplete="off" autofocus class="form-control mx-auto" id="username" name="username" placeholder="Username" type="text">
+            </div>
+            <div class="mb-3 input-group">
+                <input class="form-control mx-auto" id="password" name="password" placeholder="Password" type="password">
+                <div class="input-group-addon input-group-button">
+                    <button class="btn btn-secondary" type="button" aria-label='Show password tip' onclick="getElementById('pw_hint').innerHTML =
+                                                                                                            `<div class='alert alert-secondary alert-dismissable' role='alert'><div class='row'><div class='col-11'>Password must be at least 8 characters long and contain at least 1 lowercase letter, 1 uppercase letter and 1 number.</div><div class='col-1'><button type='button' class='btn-close' style='float:right;' data-bs-dismiss='alert' aria-label='Close'></button></div></div></div>`">
+                        <i class="bi bi-question-circle-fill"></i></button>
+                </div>
+            </div>
+            <div id="pw_hint"></div>
+            <div class="mb-3">
+                <input class="form-control mx-auto" id="confirmation" name="confirmation" placeholder="Confirm password" type="password">
+            </div>
+            <div class="mx-auto w-auto text-center">
+                <button class="btn btn-primary" type="submit">Register</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
